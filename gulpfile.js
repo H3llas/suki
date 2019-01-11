@@ -132,12 +132,21 @@ gulp.task( 'vendors', function( done ) {
 	 * Main page scripts
 	 */
 
-	// Normalize.css
+	// Copy Normalize CSS to assets
 	gulp.src( './node_modules/normalize.css/normalize.css' )
 		.pipe( replace( /\/\*\!/, '/*' ) )
 		.pipe( uglifycss( { uglyComments: true } ) )
 		.pipe( rename( { prefix: '_', extname: '.scss' } ) )
 		.pipe( gulp.dest( config.dest.scss ) );
+
+	// Copy Vanilla Picker JS tp assets
+	gulp.src( './node_modules/vanilla-picker/dist/vanilla-picker?(.min).js' )
+		.pipe( gulp.dest( config.dest.js + '/vendors' ) );
+
+	// Change version
+	gulp.src( './inc/admin/class-suki-admin.php', { base: './' } )
+		.pipe( replace( /(\$ver\['vanilla-picker'\] = )(?:.*)/g, '$1\'' + info.devDependencies['vanilla-picker'].replace( '^', '' ) + '\';' ) )
+		.pipe( gulp.dest( './' ) );
 
 	/**
 	 * Google Fonts JSON

@@ -137,6 +137,7 @@ class Suki_Admin {
 		// Fetched version from package.json
 		$ver = array();
 		$ver['wp-color-picker-alpha'] = '2.1.3';
+		$ver['vanilla-picker'] = '2.7.0';
 
 		/**
 		 * Hook: Styles to be included before admin JS
@@ -145,6 +146,7 @@ class Suki_Admin {
 
 		// Register JS files
 		wp_register_script( 'wp-color-picker-alpha', SUKI_JS_URL . '/vendors/wp-color-picker-alpha' . SUKI_ASSETS_SUFFIX . '.js', array( 'wp-color-picker' ), $ver['wp-color-picker-alpha'], true );
+		wp_register_script( 'vanilla-picker', SUKI_JS_URL . '/vendors/vanilla-picker' . SUKI_ASSETS_SUFFIX . '.js', array(), $ver['vanilla-picker'], true );
 
 		// Enqueue JS files.
 		wp_enqueue_script( 'suki-admin', SUKI_JS_URL . '/admin/admin' . SUKI_ASSETS_SUFFIX . '.js', array( 'jquery' ), SUKI_VERSION, true );
